@@ -1,28 +1,30 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
 const path = require("path");
-require("./db");
+const cors = require("cors");
+require("dotenv").config();
 
 const authRoutes = require("./routes/auth");
 const todoRoutes = require("./routes/todos");
 
-
 const app = express();
-const cors = require("cors");
+
 app.use(cors());
-const Port = 3000;
+app.use(express.json());
 
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log("MongoDB connected"))
+.catch((err) => console.error("MongoDB connection error:", err));
 
-
-  app.use(express.json());
-
-  app.use("/auth",authRoutes);
-  app.use("/api", todoRoutes);
-
+app.use("/auth", authRoutes);
+app.use("/api", todoRoutes);
 
 app.use(express.static(path.join(__dirname, "../Frontend")));
 
-  app.listen(Port , () =>{
-    console.log("Server is listening to post "+Port )
-  })
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("Server is listening on port " + PORT);
+});
