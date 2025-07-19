@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>    <meta charset="UTF_8"/>
+    <meta name="viewport" content="width=device-width , initial-scaled=1.0"/>
+    <title>Todo Web App</title>
+    <link rel="stylesheet"  href ="style.css"/>
+    </head>
+    <body>
+        <div id="auth-section">
+            <h2>SignUp</h2>
+            <input id="signup-username" type="text" placeholder="Username"/>
+            <input id="signup-email" type="text" placeholder="Email"/>
+            <input id="signup-password" type="password" placeholder="Password"/>
+            <button onclick="signup()">SignUp</button>
+
+            <h2>Login</h2>
+            <input id="login-email" type="text" placeholder="Email"/>
+            <input id="login-password" type="password" placeholder="Password"/>
+            <button onclick="login()">LogIn</button>
+        </div>
+
+        <div id="todo-section" style="display:none;"><!--To initially hide the Todo section when the page first loads.-->
+            <h2>Todo List</h2>
+            <input id="todo-input" type="text" placeholder="Add a new Todo" />
+            <button onclick="addTodo()">Add Todo</button>
+            <ul id="todo-list"></ul>
+            <button onclick="logout()"> Log out</button>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="script.js"></script>
+
+    </body>
+</html>
