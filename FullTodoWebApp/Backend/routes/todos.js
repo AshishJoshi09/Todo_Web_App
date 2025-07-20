@@ -39,4 +39,17 @@ router.get("/todos", auth, async (req, res) => {
 
 });
 
+router.delete("/todo/:id", async function (req , res){
+    try{
+      const deleted = await TodoModel.findByIdAndDelete(req.params.id);
+      if(!deleted){
+        return res.status(404).json({message : "Todo Not Found"});
+      }
+      res.json({ message: "Todo deleted successfully" });
+    }
+    catch(error){
+       res.status(500).json({ message: "Error deleting todo" });
+    }
+});
+
 module.exports = router;
